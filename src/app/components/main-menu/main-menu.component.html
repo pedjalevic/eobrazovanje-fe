@@ -1,0 +1,25 @@
+<div class="w-25 bg-light d-inline-flex">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 h-100 padding-bottom-15">
+        <div class="list-group" routerLinkActive="active" id="list-tab" role="tablist">
+          <a routerLink="admins" *ngIf="userRole === 'ROLE_ADMIN'" class="list-group-item list-group-item-action" data-toggle="list" role="tab"><i class="fa mr-2 text-body fa-user-secret"></i>Administrator information</a>
+          <a routerLink="teacher" *ngIf="userRole !== 'ROLE_STUDENT'" class="list-group-item list-group-item-action" data-toggle="list" role="tab"><i class="fa mr-2 fa-user-circle-o text-body"></i>Teacher information</a>
+          <a routerLink="student" *ngIf="userRole !== 'ROLE_TEACHER'" class="list-group-item list-group-item-action" data-toggle="list" role="tab"><i class="fa mr-2 fa-user-o text-body"></i>Student information</a>
+          <a routerLink="study-programs" *ngIf="userRole === 'ROLE_ADMIN'" class="list-group-item list-group-item-action" data-toggle="list" role="tab"><i class="fa mr-2 fa-tasks text-body"></i>Study programs</a>
+          <a routerLink="courses" *ngIf="userRole !== 'ROLE_STUDENT'" class="list-group-item list-group-item-action" data-toggle="list" role="tab"><i class="fa mr-2 fa-book text-body"></i>Courses</a>
+          <a routerLink="engagements" *ngIf="userRole === 'ROLE_ADMIN'" class="list-group-item list-group-item-action" data-toggle="list" role="tab"><i class="fa mr-2 fa-users text-body"></i>Engagements</a>
+          <a routerLink="term" *ngIf="userRole === 'ROLE_ADMIN'" class="list-group-item list-group-item-action" data-toggle="list" role="tab"><i class="fa mr-2 fa-calendar-check-o text-body"></i>Term</a>
+          <a routerLink="exam" *ngIf="userRole !== 'ROLE_STUDENT'" class="list-group-item list-group-item-action" data-toggle="list" role="tab"><i class="fa mr-2 fa-pencil-square-o text-body"></i>Exams</a>
+          <a routerLink="grades" *ngIf="userRole !== 'ROLE_TEACHER'" class="list-group-item list-group-item-action" data-toggle="list" role="tab"><i class="fa mr-2 fa-check-square-o text-body"></i>Passed exams</a>
+          <a routerLink="exam-failed" *ngIf="userRole !== 'ROLE_TEACHER'" class="list-group-item list-group-item-action" data-toggle="list" role="tab"><i class="fa mr-2 fa-square-o text-body"></i>Failed exams</a>
+          <a routerLink="exam-history" *ngIf="userRole !== 'ROLE_TEACHER'" class="list-group-item list-group-item-action" data-toggle="list" role="tab"><i class="fa mr-2 fa-history text-body"></i>Exams history</a>
+          <a routerLink="exam-registrations" *ngIf="userRole !== 'ROLE_TEACHER'" class="list-group-item list-group-item-action" data-toggle="list" role="tab"><i class="fa mr-2 fa-sign-in text-body"></i>Exams registration</a>
+          <a routerLink="exam-grade" *ngIf="userRole !== 'ROLE_STUDENT'" class="list-group-item list-group-item-action" data-toggle="list" role="tab"><i class="fa mr-2 fa-sign-out text-body"></i>Exams grade</a>
+          <a routerLink="documents" class="list-group-item list-group-item-action" data-toggle="list" role="tab"><i class="fa mr-2 fa-archive text-body"></i>Student documents</a>
+          <!-- <a routerLink="payments" class="list-group-item list-group-item-action" data-toggle="list" role="tab"><i class="fa mr-2 fa-credit-card text-body"></i>Financial card</a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+<div class="w-75 d-inline-flex tabs">
+  <div class="container container-wrapper co pr-0">
+    <div class="row row-body-my">
+      <div class="col-md-12 pr-0">
+        <ul class="nav nav-tabs">
+          <li (click)="changTab(1)" class="nav-item"> <a [ngClass]="(activeTab === 1) ? 'active' : ''" href="" class="nav-link " data-toggle="tab" data-target="#tabone">List</a> </li>
+          <li (click)="changTab(2)" class="nav-item"> <a [ngClass]="(activeTab === 2) ? 'active' : ''" class="nav-link" href="" data-toggle="tab" data-target="#tabtwo">Details</a> </li>
+        </ul>
+        <div class="tab-content mt-2">
+          <div  [ngClass]="(activeTab === 1) ? 'show active' : ''" class="tab-pane fade" id="tabone" role="tabpanel">
+            <form>
+              <div class="form-group form-inline">
+                <div class="pr-2 text-right" title="Add"><a class="btn btn-success" (click)="checkFormDirty(0)" ><i class="fa fa-plus fa-fw fa-1x py-1"></i></a></div>
+                  Search: <input class="form-control ml-2" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search">
+              </div>
+            </form>
+
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Engagement type</th>
+                <th scope="col">Course</th>
+                <th scope="col">Teacher</th>
+                <th scope="col"></th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let engagement of engagementsList | filter:searchText" (dblclick)="onEngagementSelect(engagement.id)">
+                <td>{{engagement.id}}</td>
+                <td>{{engagement.engagementType}}</td>
+                <td>{{engagement.course.name}}</td>
+                <td>{{engagement.teacher.firstName + ' '+ engagement.teacher.lastName}}</td>
+                <td>
+                  <a title="Edit" class="btn btn-info mr-1" (click)="onEngagementSelect(engagement.id)"><i class="fa fa-pencil fa-fw fa-1x py-1"></i></a>
+                  <a title="Delete" class="btn btn-danger" (click)="deleteEngagement(engagement.id)"><i class="fa fa-trash fa-fw fa-1x py-1"></i></a>
+              </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div [ngClass]="(activeTab === 2) ? 'show active' : ''" class="tab-pane fade" id="tabtwo" role="tabpanel">
+            <div class="card">
+              <div class="card-body w-100 h-100">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5 class="card-title"><b>General engagement info:</b></h5>
+                  </div>
+                  <div title="Add" class="col-md-6 text-right"><a class="btn btn-success" (click)="checkFormDirty(0)" ><i class="fa fa-plus fa-fw fa-1x py-1"></i></a></div>
+                </div>
+                <form [formGroup]="engagementForm">
+                  <div class="row">
+                    <div class="col-md-3 py-2 d-flex align-items-center justify-content-end border-right"><label>Id:</label></div>
+                    <div class="col-md-6 d-flex align-items-center justify-content-start">
+                      <input class="form-control" formControlName="id" type="number" readonly>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3 py-2 d-flex align-items-center justify-content-end border-right"><label>Engagement type:</label></div>
+                    <div class="col-md-6 d-flex align-items-center justify-content-start">
+                      <select class="form-control" formControlName="engagementType">
+                        <option *ngFor="let engagementType of engagementTypes | keyvalue" [ngValue]="engagementType.value">{{engagementType.value}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3 py-2 d-flex align-items-center justify-content-end border-right"><label>Teacher:</label></div>
+                    <div class="col-md-6 d-flex align-items-center justify-content-start">
+                      <select class="form-control" formControlName="teacher">
+                        <option *ngFor="let teacher of teachersList" [ngValue]="teacher.id" valuePrimitive="true">{{teacher.firstName + " " + teacher.lastName}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3 py-2 d-flex align-items-center justify-content-end border-right"><label>Course:</label></div>
+                    <div class="col-md-6 d-flex align-items-center justify-content-start">
+                      <select class="form-control" formControlName="course">
+                        <option *ngFor="let course of coursesList" [ngValue]="course.id" valuePrimitive="true">{{course.name}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6"></div>
+                    <div title="Save" class="col-md-6 d-flex justify-content-end align-items-center"><a class="btn btn-info" (click)="saveEngagement()">Save</a></div>
+                  </div>
+              </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

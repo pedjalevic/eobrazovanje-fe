@@ -1,0 +1,73 @@
+<!-- <div class="w-75 d-inline-flex tabs">
+  <div class="card w-100 card-fix">
+    <div class="card-body w-100 h-100">
+      <div class="row">
+        <div class="col-md-12">
+          <form id="c_form-h" class="">
+            <div class="form-group row"> <label for="inputmailh" class="col-2 col-form-label text-right">Upload:</label>
+              <div class="col-10 d-flex justify-content-center align-items-center">
+                <input type="file" class="form-control-file" id="inputmailh" placeholder="mail@example.com"><a class="btn btn-success" href="#">Upload</a> </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="card card-fix">
+        <div class="card-body border mb-1">
+          <h5 class="card-title">Scanned high school diploma</h5>
+          <h6 class="card-subtitle my-2 text-muted">300KB</h6>
+          <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6 d-flex justify-content-end align-items-center"><a class="btn btn-info" href="#">Download</a></div>
+          </div>
+        </div>
+        <div class="card-body border">
+          <h5 class="card-title">Scanned high school diploma</h5>
+          <h6 class="card-subtitle my-2 text-muted">300KB</h6>
+          <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6 d-flex justify-content-end align-items-center"><a class="btn btn-info" href="#">Download</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="w-75 d-inline-flex tabs">
+  <div class="container container-wrapper co pr-0">
+    <div class="row row-body-my">
+      <div class="col-md-12 pr-0">
+        <ul class="nav nav-tabs">
+          <li (click)="changTab(1)" class="nav-item"> <a [ngClass]="(activeTab === 1) ? 'active' : ''" href="" class="nav-link " data-toggle="tab" data-target="#tabone">List</a> </li>
+        </ul>
+        <div class="tab-content mt-2">
+          <div  [ngClass]="(activeTab === 1) ? 'show active' : ''" class="tab-pane fade" id="tabone" role="tabpanel">
+            <form>
+              <div class="form-group form-inline">
+                  Search: <input class="form-control ml-2" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search">
+                  <div [ngClass]="(adminRole) ? '' : ' d-none'" class="row ml-3 student-filter">
+                    <select class="form-control w-100" [(ngModel)]="selectedStudent"  [ngModelOptions]="{standalone: true}">
+                      <option *ngFor="let student of studentsList" [ngValue]="student.id"> {{ student.firstName + ' ' + student.lastName }} </option>
+                    </select>
+                  </div>
+                  <div [ngClass]="(selectedStudent !== undefined && selectedStudent !== null) ? '' : ' d-none'" class="ml-4"><a class="btn btn-success" (click)="getReports()">Reports</a></div>
+              </div>
+            </form>
+
+            <div class="card card-fix" *ngFor="let document of documentsList | filter:searchText">
+              <div class="card-body border mb-1">
+                <h5 class="card-title">{{document}}</h5>
+                <h6 class="card-subtitle my-2 text-muted"></h6>
+                <div class="row">
+                  <div class="col-md-6"></div>
+                  <div class="col-md-6 d-flex justify-content-end align-items-center"><a class="btn btn-info" (click)="getDocument(document)">Download</a></div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

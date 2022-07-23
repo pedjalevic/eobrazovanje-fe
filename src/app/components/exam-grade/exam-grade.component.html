@@ -1,0 +1,56 @@
+<div class="w-75 d-inline-flex tabs">
+  <div class="container container-wrapper co pr-0">
+    <div class="row row-body-my">
+      <div class="col-md-12 pr-0">
+        <ul class="nav nav-tabs">
+          <li (click)="changTab(1)" class="nav-item"> <a [ngClass]="(activeTab === 1) ? 'active' : ''" href="" class="nav-link " data-toggle="tab" data-target="#tabone">List</a> </li>
+        </ul>
+        <div class="tab-content mt-2">
+          <div  [ngClass]="(activeTab === 1) ? 'show active' : ''" class="tab-pane fade" id="tabone" role="tabpanel">
+            <form>
+              <div class="form-group form-inline">
+                  Search: <input class="form-control ml-2" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search">
+                  <div class="row ml-3 student-filter" [ngClass]="(teacherRole) ? ' d-none' : ''">
+                    <select class="form-control w-100" [(ngModel)]="selectedTeacher"  [ngModelOptions]="{standalone: true}" (ngModelChange)="teacherSelect($event)">
+                      <option *ngFor="let teacher of teachersList" [ngValue]="teacher.id"> {{ teacher.firstName + ' ' + teacher.lastName }} </option>
+                    </select>
+                  </div>
+              </div>
+            </form>
+
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th scope="col">Term</th>
+                <th scope="col">Course</th>
+                <th scope="col">Student</th>
+                <th scope="col">Exam date</th>
+                <th scope="col">Exam grade</th>
+                <th scope="col"></th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let grade of examGradeList | filter:searchText">
+                  <td>{{ grade.exam.term.name }}</td>
+                  <td>{{ grade.exam.course.name }}</td>
+                  <td>{{ grade.student.firstName + ' ' + grade.student.lastName }}</td>
+                  <td>{{ grade.exam.examDate | date }}</td>
+                  <td>
+                    <div class="row pr-2">
+                      <select class="form-control" [(ngModel)]="selectedGrade" [ngModelOptions]="{standalone: true}">
+                        <option *ngFor="let grade of gradeType | keyvalue" [ngValue]="grade.value">{{ grade.value }}</option>
+                      </select>
+                    </div>
+                  </td>
+                  <td>
+                    <a title="Save grade" class="btn btn-info mr-1 {{selectedGrade === undefined ? ' disabled' : ''}}" (click)="checkSaveStatus(grade)"><i class="fa fa-floppy-o fa-fw fa-1x py-1"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

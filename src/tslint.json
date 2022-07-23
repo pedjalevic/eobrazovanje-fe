@@ -1,0 +1,32 @@
+{
+  "extends": "../tslint.json",
+  "linterOptions": {
+    "project": "../tsconfig.json"
+  },
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      "app",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "app",
+      "kebab-case"
+    ],
+    "no-console": [true, "log"],
+    "whitespace": [
+        true, 
+        "check-branch", 
+        "check-operator", 
+        "check-typecast",
+        "check-rest-spread",
+        "check-type",
+        "check-type-operator",
+        "check-postbrace",
+        "check-preblock"
+      ]
+  }
+}

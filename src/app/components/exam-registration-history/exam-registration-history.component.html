@@ -1,0 +1,46 @@
+<div class="w-75 d-inline-flex tabs">
+  <div class="container container-wrapper co pr-0">
+    <div class="row row-body-my">
+      <div class="col-md-12 pr-0">
+        <ul class="nav nav-tabs">
+          <li (click)="changTab(1)" class="nav-item"> <a [ngClass]="(activeTab === 1) ? 'active' : ''" href="" class="nav-link " data-toggle="tab" data-target="#tabone">List</a> </li>
+        </ul>
+        <div class="tab-content mt-2">
+          <div  [ngClass]="(activeTab === 1) ? 'show active' : ''" class="tab-pane fade" id="tabone" role="tabpanel">
+            <form>
+              <div class="form-group form-inline">
+                  Search: <input class="form-control ml-2" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search">
+                  <div class="row ml-3 student-filter" [ngClass]="(studentRole) ? ' d-none' : ''">
+                    <select class="form-control w-100" [(ngModel)]="selectedStudent"  [ngModelOptions]="{standalone: true}" (ngModelChange)="studentSelect($event)">
+                      <option *ngFor="let student of studentsList" [ngValue]="student.id"> {{ student.firstName + ' ' + student.lastName }} </option>
+                    </select>
+                  </div>
+              </div>
+            </form>
+
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th scope="col">Term</th>
+                <th scope="col">Course</th>
+                <th scope="col">Location</th>
+                <th scope="col">Date</th>
+                <th scope="col">Status</th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let examRegistration of examRegistrationList | filter:searchText">
+                  <td>{{ examRegistration.exam.term.name }}</td>
+                  <td>{{ examRegistration.exam.course.name }}</td>
+                  <td>{{ examRegistration.exam.location }}</td>
+                  <td>{{ examRegistration.exam.examDate | date }}</td>
+                  <td>{{ examRegistration.examRegistrationStatus }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
